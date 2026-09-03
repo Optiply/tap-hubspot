@@ -532,11 +532,13 @@ class Taphubspot(Tap):
             (DynamicDiscoveredHubspotV3Stream,),
             {
                 "name": name,
-                "path": f"crm/v3/objects/{object_type_id}/",
+                "path": f"crm/v3/objects/{object_type_id}/search",   # search endpoint
+                "properties_url": f"crm/v3/properties/{object_type_id}",   # added
                 "records_jsonpath": "$.results[*]",
                 "primary_keys": ["id"],
                 "replication_key": "updatedAt",
-                "page_size": 100,
+                "replication_key_filter": "hs_lastmodifieddate",    # added
+                "page_size": 200,                                   # search max
                 "schema": schema,
                 "is_custom_stream": True,
                 "object_id": custom_object.get("id"),
