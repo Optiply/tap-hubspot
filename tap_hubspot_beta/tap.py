@@ -15,7 +15,7 @@ from hotglue_etl_exceptions import InvalidCredentialsError
 from tap_hubspot_beta.client_base import TapHubspotDailyAPIQuotaExceededException
 
 from tap_hubspot_beta.auth import OAuth2Authenticator
-from tap_hubspot_beta.client_v3 import hubspotV3Stream, DynamicDiscoveredHubspotV3Stream, hubspotV3SearchStream
+from tap_hubspot_beta.client_v3 import hubspotV3Stream, DynamicDiscoveredHubspotV3Stream, hubspotV3SearchStream, DynamicDiscoveredHubspotSearchStream
 from tap_hubspot_beta.streams import (
     AccountStream,
     AssociationDealsCompaniesStream,
@@ -529,7 +529,7 @@ class Taphubspot(Tap):
 
         return type(
             class_name,
-            (DynamicDiscoveredHubspotV3Stream,),
+            (DynamicDiscoveredHubspotSearchStream,),
             {
                 "name": name,
                 "path": f"crm/v3/objects/{object_type_id}/search",   # search endpoint
