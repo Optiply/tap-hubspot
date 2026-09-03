@@ -610,3 +610,9 @@ class hubspotHistoryV3Stream(hubspotV3Stream):
         payload["propertiesWithHistory"] = self.selected_properties
         payload["inputs"] = context["ids"]
         return payload
+
+
+class DynamicDiscoveredHubspotSearchStream(hubspotV3SearchStream):
+    primary_keys = ["id"]
+    replication_key = "updatedAt"
+    replication_key_filter = "hs_lastmodifieddate"
